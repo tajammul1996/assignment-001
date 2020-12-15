@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import { Form, Input, Button, Select, DatePicker } from "antd";
 
+import { v4 as uuidv4 } from 'uuid';
+
 const { Option } = Select;
 
 const layout = {
@@ -15,7 +17,7 @@ const tailLayout = {
     }
 }
 
-const AddBill = () => {
+const AddBill = ({onAddBill}) => {
   const formRef = useRef(null);
   const [formData, setFormData] = useState({});
 
@@ -79,8 +81,8 @@ const AddBill = () => {
         <DatePicker format={"YYYY/MM/DD"} onChange={(date, dateString) => setFormData({...formData, date: dateString})}/>
       </Form.Item>
       <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit" onClick={() => console.log(formData)}>
-            Submit
+          <Button type="primary" htmlType="submit" onClick={() => onAddBill({...formData, id: uuidv4()})}>
+            Add bill
           </Button>
         </Form.Item>
     </Form>

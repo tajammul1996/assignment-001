@@ -1,12 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import 'antd/dist/antd.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import "antd/dist/antd.css";
 
 import { Home } from "./containers";
 
+import { store } from "./store/config.store";
+
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <Home />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </Provider>,
+  document.getElementById("root")
 );
