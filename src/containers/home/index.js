@@ -4,9 +4,13 @@ import {
   PaperClipOutlined,
   LineChartOutlined
 } from "@ant-design/icons";
+
 import styles from "./styles.module.css"
+import { AddBill } from "../../components";
 
 const { Header, Content, Sider } = Layout;
+
+
 
 const Home = () => {
   return (
@@ -33,7 +37,7 @@ const Home = () => {
             </Menu>
           </Sider>
           <Content style={{ padding: "0 24px", minHeight: "500px" }}>
-            Content
+            <AddBill />
           </Content>
         </Layout>
       </Content>
