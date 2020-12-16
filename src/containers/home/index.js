@@ -8,8 +8,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./styles.module.css"
-import { AddBill } from "../../components";
-import { addBill } from "../../store/actions/bill.actions"
+import { AddBill, PayBills, AllBills, Graph } from "../../components";
+import { addBill, removeBill } from "../../store/actions/bill.actions"
 
 const { Header, Content, Sider } = Layout;
 
@@ -43,10 +43,14 @@ const Home = () => {
                 <Menu.Item key="add-bill" onClick={() => setSelectedTab("add-bill")}> <FileAddOutlined />Add bill</Menu.Item>
                 <Menu.Item key="all-bills" onClick={() => setSelectedTab("all-bills")}><PaperClipOutlined /> All bills</Menu.Item>
                 <Menu.Item key="graph" onClick={() => setSelectedTab("graph")}><LineChartOutlined /> Time series graph</Menu.Item>
+                <Menu.Item key="pay-bills" onClick={() => setSelectedTab("pay-bills")}><PaperClipOutlined /> Pay bills</Menu.Item>
             </Menu>
           </Sider>
-          <Content style={{ padding: "0 24px", minHeight: "500px" }}>
+          <Content className={styles.contentWrapper}>
             {selectedTab === "add-bill" && <AddBill onAddBill={(bill) => dispatch(addBill(bill))}/>}
+            {selectedTab === "all-bills" && <AllBills allBills={allBills} deleteBill={(id) => dispatch(removeBill(id))}/>}
+            {selectedTab === "graph" && <Graph allBills={allBills}/>}
+            {selectedTab === "pay-bills" && <PayBills allBills={allBills}/>}
           </Content>
         </Layout>
       </Content>

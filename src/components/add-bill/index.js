@@ -20,7 +20,6 @@ const tailLayout = {
 const AddBill = ({onAddBill}) => {
   const formRef = useRef(null);
   const [formData, setFormData] = useState({});
-
   return (
     <Form {...layout} ref={formRef}>
       <Form.Item
@@ -78,10 +77,12 @@ const AddBill = ({onAddBill}) => {
           },
         ]}
       >
-        <DatePicker format={"YYYY/MM/DD"} onChange={(date, dateString) => setFormData({...formData, date: dateString})}/>
+        <DatePicker disabledDate={(current) => current && current.valueOf() > Date.now()} format={"YYYY-MM-DD"} onChange={(date, dateString) => setFormData({...formData, date: dateString})}/>
       </Form.Item>
       <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit" onClick={() => onAddBill({...formData, id: uuidv4()})}>
+          <Button type="primary" htmlType="submit" onClick={() => {
+            onAddBill({...formData, id: uuidv4()})
+            }}>
             Add bill
           </Button>
         </Form.Item>
